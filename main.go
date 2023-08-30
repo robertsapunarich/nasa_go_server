@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+
 	nasa "github.com/robertsapunarich/nasa"
 )
 
@@ -9,8 +11,14 @@ const ApiKey = "KcEfEGqDaIpifxHTLajvMgz4BXJXkFUKNoIxGyU8"
 
 func main() {
 	client := nasa.NewApiClient(BaseUrl, ApiKey)
-	var result interface{}
-	var err error
 
-	result, err = nasa.GetApod(client, nil, nil)
+	result, err := client.GetApod(nil)
+
+	if err != nil {
+		panic(err)
+	}
+
+	str := fmt.Sprintf("URL: %s", result.Url)
+
+	println(str)
 }
